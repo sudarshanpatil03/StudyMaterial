@@ -1,69 +1,218 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Study Material</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials Portal</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
 </head>
-
 <body>
-<header>
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
-      </ul>
-    
-  </nav>
-  <h1>
-        Hey! What's up 
-  </h1>
-  </header>                       <main>
-   <div>
-     
-     <h1>
-       <a href="sub.html">Notes</a>
-     </h1>
-     
-    <label 
-  
-     <label for="sub2">Subjects Pdf</label><br>
-    <ul>
-       <li><a href="https://basicmanagement.tiiny.site">Basic Management</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO">C++</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1BhIKdBevHCrqSRGFEXRQn41hkhT10Kls">HTML</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1Bt2qHixJ89KUTypGt560c6Hg62xv28a7">Demo</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1C_fM5j4VRIsB-7ktzpc_n4BuwVA3RMBP">Statistics</a></li>
-      
-      
-      
-       
-    </ul>   
-   </div>
-   <div>
-     <h2>
-Daily Notes
-</h2>
-<br>
-     <ul>
-        <li><a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO">C++</a></li>
-     </ul>
-     
-   </div>
-   
-   
-   
-   <footer>
-     
-     Copyright ©2023 by Sudarshan
-   </footer>
-   
-    
-  <script src="script.js"></script>
-</body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-open me-2"></i>Study Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">Study Materials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section text-center py-5 my-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h1 class="display-4 fw-bold mb-4">Welcome to Study Materials Portal</h1>
+                        <p class="lead mb-4">Access organized educational resources to help you excel in your studies.</p>
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <a href="subjects.html" class="btn btn-primary btn-lg px-4 gap-3">
+                                <i class="fas fa-book me-2"></i>Browse Materials
+                            </a>
+                            <a href="contact.html" class="btn btn-outline-secondary btn-lg px-4">
+                                <i class="fas fa-question-circle me-2"></i>Get Help
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Subjects -->
+            <section class="study-section">
+                <h2 class="text-center mb-4">Featured Subject Materials</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card subject-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-business-time me-2"></i>Basic Management
+                                </h5>
+                                <p class="card-text">Learn fundamental management concepts, organizational behavior, and leadership skills.</p>
+                                <a href="https://basicmanagement.tiiny.site" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card subject-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-code me-2"></i>C++ Programming
+                                </h5>
+                                <p class="card-text">Master C++ programming language with comprehensive lecture notes and examples.</p>
+                                <a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card subject-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-chart-line me-2"></i>Statistics
+                                </h5>
+                                <p class="card-text">Understand statistical methods, data analysis, probability and statistical inference.</p>
+                                <a href="https://drive.google.com/drive/folders/1C_fM5j4VRIsB-7ktzpc_n4BuwVA3RMBP" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="subjects.html" class="btn btn-outline-secondary">View All Subjects</a>
+                </div>
+            </section>
+
+            <!-- Daily Notes Section -->
+            <section class="study-section daily-notes">
+                <h2>Daily Notes</h2>
+                <div class="card mt-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-calendar-day me-2"></i>Latest Updates</span>
+                        <span class="badge bg-primary">New</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">C++ Programming - Latest Notes</h5>
+                        <p class="card-text">Updated lecture notes on C++ templates, STL, and advanced programming concepts.</p>
+                        <a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO" target="_blank" class="btn btn-sm btn-primary">Access Notes</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="study-section">
+                <h2 class="text-center mb-4">Why Use Our Platform?</h2>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-graduation-cap fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Quality Content</h5>
+                                <p class="card-text">Carefully curated learning materials verified by educators.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-mobile-alt fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Mobile Friendly</h5>
+                                <p class="card-text">Access your study materials on any device, anywhere.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-sync fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Regular Updates</h5>
+                                <p class="card-text">Constantly updated with the latest educational resources.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Community Support</h5>
+                                <p class="card-text">Connect with peers and instructors for help.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Study Portal</h5>
+                    <p>A platform for organizing and sharing educational materials for students.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                        <li><a href="subjects.html" class="text-decoration-none">Study Materials</a></li>
+                        <li><a href="about.html" class="text-decoration-none">About</a></li>
+                        <li><a href="services.html" class="text-decoration-none">Services</a></li>
+                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect</h5>
+                    <div class="d-flex gap-3 fs-4">
+                        <a href="#" class="text-decoration-none"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-decoration-none"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-decoration-none"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">Copyright &copy; 2023 by Sudarshan. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
 </html>
