@@ -11,14 +11,418 @@
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <style>
+        /* Custom styles to supplement Bootstrap - Cross-Browser Compatible */
+        :root {
+            --primary-gradient: linear-gradient(135deg, var(--bs-primary), var(--bs-info));
+        }
+
+        /* Global styles with improved cross-browser compatibility */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        /* Page sections */
+        .page-section {
+            display: none; /* Hide all sections by default */
+        }
+
+        .page-section.active {
+            display: block; /* Show active section */
+        }
+
+        /* Add some breathing room */
+        .study-section {
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced hero section styling */
+        .hero-section {
+            padding: 3rem 0;
+            background: var(--bs-dark);
+            border-radius: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .hero-section h1, .hero-section p, .hero-section .btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced navbar styling */
+        .navbar {
+            background-image: var(--primary-gradient) !important;
+            background: -webkit-linear-gradient(135deg, var(--bs-primary), var(--bs-info)) !important;
+            background: -moz-linear-gradient(135deg, var(--bs-primary), var(--bs-info)) !important;
+            background: -o-linear-gradient(135deg, var(--bs-primary), var(--bs-info)) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            position: relative;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            -webkit-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced footer styling */
+        footer {
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            background-image: var(--primary-gradient) !important;
+            background: -webkit-linear-gradient(135deg, var(--bs-primary), var(--bs-info)) !important;
+            background: -moz-linear-gradient(135deg, var(--bs-primary), var(--bs-info)) !important;
+            background: -o-linear-gradient(135deg, var(--bs-primary), var(--bs-info)) !important;
+            position: relative;
+            overflow: hidden;
+            border-top: none;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+            -webkit-box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        footer h5, footer p, footer ul, footer .d-flex {
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white !important;
+            opacity: 0.8;
+        }
+
+        /* Enhanced link hover effect */
+        .subject-link {
+            display: inline-block;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .subject-link:hover {
+            -webkit-transform: translateY(-3px);
+            -ms-transform: translateY(-3px);
+            transform: translateY(-3px);
+        }
+
+        /* Enhanced card styling with cross-browser compatibility */
+        .subject-card {
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            height: 100%;
+            border-top: 3px solid var(--bs-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 30px 30px 0;
+            border-color: transparent var(--bs-info) transparent transparent;
+            opacity: 0.3;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+            -webkit-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+            -moz-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+            -webkit-transform: translateY(-5px);
+            -ms-transform: translateY(-5px);
+            transform: translateY(-5px);
+        }
+
+        .subject-card:hover::before {
+            opacity: 0.6;
+        }
+
+        .card-title {
+            position: relative;
+            z-index: 1;
+        }
+
+        .subject-card .btn {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .subject-card .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .subject-card .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced daily notes section */
+        .daily-notes {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .daily-notes::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-image: var(--primary-gradient);
+            background: -webkit-linear-gradient(top, var(--bs-primary), var(--bs-info));
+            background: -moz-linear-gradient(top, var(--bs-primary), var(--bs-info));
+            background: -o-linear-gradient(top, var(--bs-primary), var(--bs-info));
+        }
+
+        /* Custom badge for new content */
+        .badge-new {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            -webkit-animation: pulse 2s infinite;
+            animation: pulse 2s infinite;
+        }
+
+        @-webkit-keyframes pulse {
+            0% {
+                -webkit-box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0.4);
+            }
+            70% {
+                -webkit-box-shadow: 0 0 0 10px rgba(var(--bs-primary-rgb), 0);
+            }
+            100% {
+                -webkit-box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                -moz-box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0.4);
+                box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0.4);
+            }
+            70% {
+                -moz-box-shadow: 0 0 0 10px rgba(var(--bs-primary-rgb), 0);
+                box-shadow: 0 0 0 10px rgba(var(--bs-primary-rgb), 0);
+            }
+            100% {
+                -moz-box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0);
+                box-shadow: 0 0 0 0 rgba(var(--bs-primary-rgb), 0);
+            }
+        }
+
+        /* Enhanced buttons */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            -webkit-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            -webkit-transition: all 0.6s ease;
+            -moz-transition: all 0.6s ease;
+            -o-transition: all 0.6s ease;
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::after {
+            left: 100%;
+        }
+
+        /* Feature cards enhancements */
+        .card {
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            -webkit-transform: translateY(-5px);
+            -ms-transform: translateY(-5px);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Fallbacks for older browsers */
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            /* IE10+ CSS */
+            .hero-section::before,
+            .subject-card::before,
+            footer::before {
+                display: none; /* IE doesn't support these decorative elements well */
+            }
+            
+            .navbar, footer {
+                background: var(--bs-primary) !important; /* Fallback for IE */
+            }
+            
+            .subject-link:hover,
+            .card:hover,
+            .subject-card:hover,
+            .btn:hover {
+                transform: none; /* IE doesn't handle transforms well */
+            }
+        }
+
+        /* Print styling for better document printing */
+        @media print {
+            body {
+                background: none !important;
+                color: #000 !important;
+            }
+            
+            .navbar, footer {
+                background: none !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+            
+            .hero-section {
+                background: none !important;
+                box-shadow: none !important;
+            }
+            
+            .card, .subject-card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+            
+            .subject-card::before,
+            .hero-section::before,
+            footer::before {
+                display: none !important;
+            }
+            
+            a {
+                text-decoration: underline !important;
+                color: #000 !important;
+            }
+            
+            .btn {
+                border: 1px solid #000 !important;
+                background: none !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="#" onclick="showPage('home')">
                 <i class="fas fa-book-open me-2"></i>Study Portal
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
@@ -28,19 +432,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" onclick="showPage('home')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="subjects.html">Study Materials</a>
+                        <a class="nav-link" onclick="showPage('subjects')">Study Materials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" onclick="showPage('about')">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
+                        <a class="nav-link" onclick="showPage('services')">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" onclick="showPage('contact')">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -49,126 +453,870 @@
 
     <!-- Main Content -->
     <main>
-        <div class="container">
-            <!-- Hero Section -->
-            <section class="hero-section text-center py-5 my-4">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <h1 class="display-4 fw-bold mb-4">Welcome to Study Materials Portal</h1>
-                        <p class="lead mb-4">Access organized educational resources to help you excel in your studies.</p>
+        <!-- HOME PAGE -->
+        <div id="home-page" class="page-section active">
+            <div class="container">
+                <!-- Hero Section -->
+                <section class="hero-section text-center py-5 my-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 fw-bold mb-4">Welcome to Study Materials Portal</h1>
+                            <p class="lead mb-4">Access organized educational resources to help you excel in your studies.</p>
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                                <a href="#" onclick="showPage('subjects')" class="btn btn-primary btn-lg px-4 gap-3">
+                                    <i class="fas fa-book me-2"></i>Browse Materials
+                                </a>
+                                <a href="#" onclick="showPage('contact')" class="btn btn-outline-secondary btn-lg px-4">
+                                    <i class="fas fa-question-circle me-2"></i>Get Help
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Featured Subjects -->
+                <section class="study-section">
+                    <h2 class="text-center mb-4">Featured Subject Materials</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-business-time me-2"></i>Basic Management
+                                    </h5>
+                                    <p class="card-text">Learn fundamental management concepts, organizational behavior, and leadership skills.</p>
+                                    <a href="https://basicmanagement.tiiny.site" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-code me-2"></i>C++ Programming
+                                    </h5>
+                                    <p class="card-text">Master C++ programming language with comprehensive lecture notes and examples.</p>
+                                    <a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chart-line me-2"></i>Statistics
+                                    </h5>
+                                    <p class="card-text">Understand statistical methods, data analysis, probability and statistical inference.</p>
+                                    <a href="https://drive.google.com/drive/folders/1C_fM5j4VRIsB-7ktzpc_n4BuwVA3RMBP" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="#" onclick="showPage('subjects')" class="btn btn-outline-secondary">View All Subjects</a>
+                    </div>
+                </section>
+
+                <!-- Daily Notes Section -->
+                <section class="study-section daily-notes">
+                    <h2>Daily Notes</h2>
+                    <div class="card mt-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-calendar-day me-2"></i>Latest Updates</span>
+                            <span class="badge bg-primary">New</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">C++ Programming - Latest Notes</h5>
+                            <p class="card-text">Updated lecture notes on C++ templates, STL, and advanced programming concepts.</p>
+                            <a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO" target="_blank" class="btn btn-sm btn-primary">Access Notes</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Features Section -->
+                <section class="study-section">
+                    <h2 class="text-center mb-4">Why Use Our Platform?</h2>
+                    <div class="row g-4">
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-graduation-cap fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Quality Content</h5>
+                                    <p class="card-text">Carefully curated learning materials verified by educators.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-mobile-alt fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Mobile Friendly</h5>
+                                    <p class="card-text">Access your study materials on any device, anywhere.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-sync fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Regular Updates</h5>
+                                    <p class="card-text">Constantly updated with the latest educational resources.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                                    <h5 class="card-title">Community Support</h5>
+                                    <p class="card-text">Connect with peers and instructors for help.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="study-section text-center">
+                    <div class="hero-section py-5">
+                        <h2 class="mb-3">Ready to enhance your learning?</h2>
+                        <p class="lead mb-4">Browse our comprehensive collection of study materials and resources.</p>
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                            <a href="subjects.html" class="btn btn-primary btn-lg px-4 gap-3">
-                                <i class="fas fa-book me-2"></i>Browse Materials
+                            <a href="#" onclick="showPage('subjects')" class="btn btn-primary btn-lg px-4 gap-3">
+                                <i class="fas fa-book-open me-2"></i>Get Started
                             </a>
-                            <a href="contact.html" class="btn btn-outline-secondary btn-lg px-4">
-                                <i class="fas fa-question-circle me-2"></i>Get Help
+                            <a href="#" onclick="showPage('about')" class="btn btn-outline-secondary btn-lg px-4">
+                                <i class="fas fa-info-circle me-2"></i>Learn More
                             </a>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+        </div>
 
-            <!-- Featured Subjects -->
-            <section class="study-section">
-                <h2 class="text-center mb-4">Featured Subject Materials</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card subject-card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-business-time me-2"></i>Basic Management
-                                </h5>
-                                <p class="card-text">Learn fundamental management concepts, organizational behavior, and leadership skills.</p>
-                                <a href="https://basicmanagement.tiiny.site" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
-                            </div>
+        <!-- ABOUT PAGE -->
+        <div id="about-page" class="page-section">
+            <div class="container">
+                <!-- Page Header -->
+                <section class="hero-section text-center py-5 my-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 fw-bold mb-4">About Us</h1>
+                            <p class="lead mb-4">Learn more about our mission to make education accessible and organized.</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card subject-card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-code me-2"></i>C++ Programming
-                                </h5>
-                                <p class="card-text">Master C++ programming language with comprehensive lecture notes and examples.</p>
-                                <a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card subject-card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-chart-line me-2"></i>Statistics
-                                </h5>
-                                <p class="card-text">Understand statistical methods, data analysis, probability and statistical inference.</p>
-                                <a href="https://drive.google.com/drive/folders/1C_fM5j4VRIsB-7ktzpc_n4BuwVA3RMBP" target="_blank" class="btn btn-sm btn-outline-primary">Access Materials</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-4">
-                    <a href="subjects.html" class="btn btn-outline-secondary">View All Subjects</a>
-                </div>
-            </section>
+                </section>
 
-            <!-- Daily Notes Section -->
-            <section class="study-section daily-notes">
-                <h2>Daily Notes</h2>
-                <div class="card mt-3">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-calendar-day me-2"></i>Latest Updates</span>
-                        <span class="badge bg-primary">New</span>
+                <!-- About Section -->
+                <section class="study-section">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h2 class="card-title mb-4">Our Story</h2>
+                                    <p class="card-text">The Study Materials Portal was founded in 2020 with a simple mission: to organize educational resources and make them easily accessible to students everywhere.</p>
+                                    <p class="card-text">What started as a small collection of notes for a few university courses has grown into a comprehensive platform serving students across various disciplines and educational levels.</p>
+                                    <p class="card-text">Our team consists of educators, students, and technology enthusiasts who are passionate about improving the educational experience through better organization and access to quality learning materials.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h2 class="card-title mb-4">Our Mission</h2>
+                                    <p class="card-text">We believe that education should be accessible, organized, and effective. Our platform is designed to:</p>
+                                    <ul>
+                                        <li>Provide high-quality study materials across various subjects</li>
+                                        <li>Organize resources in a way that makes them easy to find and use</li>
+                                        <li>Support students at every stage of their educational journey</li>
+                                        <li>Connect learners with educators and with each other</li>
+                                        <li>Continuously improve based on user feedback and needs</li>
+                                    </ul>
+                                    <p class="card-text">Every feature we develop is guided by these principles, ensuring that we stay focused on what matters most: helping students succeed.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">C++ Programming - Latest Notes</h5>
-                        <p class="card-text">Updated lecture notes on C++ templates, STL, and advanced programming concepts.</p>
-                        <a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO" target="_blank" class="btn btn-sm btn-primary">Access Notes</a>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Features Section -->
-            <section class="study-section">
-                <h2 class="text-center mb-4">Why Use Our Platform?</h2>
-                <div class="row g-4">
-                    <div class="col-md-3">
-                        <div class="card text-center h-100">
-                            <div class="card-body">
-                                <i class="fas fa-graduation-cap fa-3x mb-3 text-primary"></i>
-                                <h5 class="card-title">Quality Content</h5>
-                                <p class="card-text">Carefully curated learning materials verified by educators.</p>
+                <!-- Team Section -->
+                <section class="study-section">
+                    <h2 class="text-center mb-4">Our Team</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <div class="rounded-circle bg-primary mx-auto d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                                        <i class="fas fa-user fa-3x text-white"></i>
+                                    </div>
+                                    <h5 class="card-title mt-3">Sudarshan</h5>
+                                    <p class="text-muted">Founder & Lead Developer</p>
+                                    <p class="card-text">Computer science educator with a passion for making learning resources accessible to all students.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <div class="rounded-circle bg-info mx-auto d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                                        <i class="fas fa-user fa-3x text-white"></i>
+                                    </div>
+                                    <h5 class="card-title mt-3">Priya Singh</h5>
+                                    <p class="text-muted">Content Manager</p>
+                                    <p class="card-text">Educational content specialist with experience in curriculum development and digital learning resources.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <div class="rounded-circle bg-success mx-auto d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                                        <i class="fas fa-user fa-3x text-white"></i>
+                                    </div>
+                                    <h5 class="card-title mt-3">Rahul Desai</h5>
+                                    <p class="text-muted">Community Manager</p>
+                                    <p class="card-text">Former teacher who helps coordinate our growing community of students and educators.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card text-center h-100">
-                            <div class="card-body">
-                                <i class="fas fa-mobile-alt fa-3x mb-3 text-primary"></i>
-                                <h5 class="card-title">Mobile Friendly</h5>
-                                <p class="card-text">Access your study materials on any device, anywhere.</p>
+                </section>
+
+                <!-- Values Section -->
+                <section class="study-section daily-notes">
+                    <h2>Our Values</h2>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-graduation-cap me-2 text-primary"></i>Educational Excellence</h5>
+                            <p>We are committed to providing the highest quality educational resources, curated and verified by subject matter experts.</p>
+                            
+                            <h5><i class="fas fa-universal-access me-2 text-primary"></i>Accessibility</h5>
+                            <p>We believe that educational resources should be accessible to everyone, regardless of their background or circumstances.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-users me-2 text-primary"></i>Community</h5>
+                            <p>We foster a supportive community where students can learn from and help each other on their educational journey.</p>
+                            
+                            <h5><i class="fas fa-sync me-2 text-primary"></i>Continuous Improvement</h5>
+                            <p>We are constantly working to improve our platform and resources based on user feedback and educational best practices.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- SERVICES PAGE -->
+        <div id="services-page" class="page-section">
+            <div class="container">
+                <!-- Page Header -->
+                <section class="hero-section text-center py-5 my-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 fw-bold mb-4">Our Services</h1>
+                            <p class="lead mb-4">Discover how we can support your educational journey with our range of services.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Services Overview -->
+                <section class="study-section">
+                    <div class="row g-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-book me-2 text-primary"></i>Study Materials Library
+                                    </h5>
+                                    <p class="card-text">Access our comprehensive library of study materials, including lecture notes, practice problems, and reference guides across various subjects.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-check text-success me-2"></i> Well-organized content by subject and topic</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Regularly updated with new materials</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Verified by educators and subject experts</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Available in multiple formats for different learning styles</li>
+                                    </ul>
+                                    <a href="#" onclick="showPage('subjects')" class="btn btn-outline-primary mt-3">Browse Materials</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-user-graduate me-2 text-primary"></i>Personalized Learning Paths
+                                    </h5>
+                                    <p class="card-text">Get guidance on your educational journey with customized learning paths tailored to your goals and current knowledge level.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-check text-success me-2"></i> Skill assessment to identify knowledge gaps</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Custom study plans based on your learning goals</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Progress tracking and milestone achievements</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Regular updates to your learning path as you progress</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-users me-2 text-primary"></i>Community Learning Groups
+                                    </h5>
+                                    <p class="card-text">Join subject-specific study groups to collaborate with peers, share resources, and learn together in a supportive environment.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-check text-success me-2"></i> Connect with students studying the same subjects</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Weekly virtual study sessions with group members</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Resource sharing and collaborative problem-solving</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Moderated by subject matter experts and educators</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-outline-primary mt-3">Join a Group</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Expert Tutoring Sessions
+                                    </h5>
+                                    <p class="card-text">Get personalized help from qualified tutors who can address your specific questions and help you master challenging concepts.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-check text-success me-2"></i> One-on-one sessions with subject experts</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Flexible scheduling to fit your availability</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Focus on your specific questions and learning needs</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Session recordings for future reference</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-outline-primary mt-3">Book a Session</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card text-center h-100">
-                            <div class="card-body">
-                                <i class="fas fa-sync fa-3x mb-3 text-primary"></i>
-                                <h5 class="card-title">Regular Updates</h5>
-                                <p class="card-text">Constantly updated with the latest educational resources.</p>
+                </section>
+
+                <!-- Premium Services -->
+                <section class="study-section daily-notes">
+                    <h2>Premium Services</h2>
+                    <p>Upgrade your learning experience with our premium offerings designed for serious students.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">Basic</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title pricing-card-title">Free</h2>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li><i class="fas fa-check text-success me-2"></i> Access to basic study materials</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Public study groups</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Community forums</li>
+                                        <li><i class="fas fa-times text-danger me-2"></i> Premium content access</li>
+                                        <li><i class="fas fa-times text-danger me-2"></i> Tutoring sessions</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-lg btn-outline-primary w-100">Get Started</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-primary">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">Standard <span class="badge bg-warning ms-2">Popular</span></h5>
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title pricing-card-title">$9.99<small class="text-muted fw-light">/mo</small></h2>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li><i class="fas fa-check text-success me-2"></i> All basic features</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Full access to all study materials</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Practice exams and assessments</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> 2 tutoring sessions per month</li>
+                                        <li><i class="fas fa-times text-danger me-2"></i> Priority support</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-lg btn-primary w-100">Subscribe</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">Premium</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title pricing-card-title">$19.99<small class="text-muted fw-light">/mo</small></h2>
+                                    <ul class="list-unstyled mt-3 mb-4">
+                                        <li><i class="fas fa-check text-success me-2"></i> All standard features</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Unlimited tutoring sessions</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Personalized learning paths</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Priority support</li>
+                                        <li><i class="fas fa-check text-success me-2"></i> Offline material downloads</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-lg btn-outline-primary w-100">Subscribe</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card text-center h-100">
-                            <div class="card-body">
-                                <i class="fas fa-users fa-3x mb-3 text-primary"></i>
-                                <h5 class="card-title">Community Support</h5>
-                                <p class="card-text">Connect with peers and instructors for help.</p>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="study-section text-center">
+                    <div class="hero-section py-5">
+                        <h2 class="mb-3">Ready to enhance your learning experience?</h2>
+                        <p class="lead mb-4">Join thousands of students who are already benefiting from our services.</p>
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <a href="#" onclick="showPage('contact')" class="btn btn-primary btn-lg px-4 gap-3">
+                                <i class="fas fa-paper-plane me-2"></i>Contact Us
+                            </a>
+                            <a href="#" onclick="showPage('subjects')" class="btn btn-outline-secondary btn-lg px-4">
+                                <i class="fas fa-book-open me-2"></i>Explore Materials
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact-page" class="page-section">
+            <div class="container">
+                <!-- Page Header -->
+                <section class="hero-section text-center py-5 my-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 fw-bold mb-4">Contact Us</h1>
+                            <p class="lead mb-4">Have questions or feedback? We'd love to hear from you.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Information and Form -->
+                <section class="study-section">
+                    <div class="row g-4">
+                        <div class="col-lg-5">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h2 class="card-title mb-4">Get in Touch</h2>
+                                    <p class="card-text">We're here to help with any questions or feedback you might have about our platform, services, or study materials.</p>
+                                    
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="bg-primary rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <i class="fas fa-envelope text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Email</h5>
+                                            <p class="mb-0">info@studyportal.example</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="bg-primary rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <i class="fas fa-phone text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Phone</h5>
+                                            <p class="mb-0">+91 98765 43210</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="bg-primary rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <i class="fas fa-map-marker-alt text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Location</h5>
+                                            <p class="mb-0">123 Education Street, Learning City, 400001</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-start">
+                                        <div class="bg-primary rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <i class="fas fa-clock text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Office Hours</h5>
+                                            <p class="mb-0">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <h5 class="mt-4 mb-3">Connect with Us</h5>
+                                    <div class="d-flex gap-3 fs-4">
+                                        <a href="#" class="text-decoration-none"><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="text-decoration-none"><i class="fab fa-facebook"></i></a>
+                                        <a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="text-decoration-none"><i class="fab fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="card subject-card">
+                                <div class="card-body">
+                                    <h2 class="card-title mb-4">Send a Message</h2>
+                                    <form id="contactForm">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name" class="form-label">Your Name</label>
+                                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="email" class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="subject" class="form-label">Subject</label>
+                                            <input type="text" class="form-control" id="subject" placeholder="Enter subject">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Message</label>
+                                            <textarea class="form-control" id="message" rows="5" placeholder="Type your message here..." required></textarea>
+                                        </div>
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="subscribe">
+                                            <label class="form-check-label" for="subscribe">Subscribe to our newsletter</label>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+
+                <!-- FAQ Section -->
+                <section class="study-section daily-notes">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="accordion mt-4" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    How can I access the study materials?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    You can access our study materials by navigating to the <a href="#" onclick="showPage('subjects')">Study Materials</a> section of our website. From there, you can browse by subject and topic to find the resources you need.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Are all the materials free to use?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer a mix of free and premium content. Basic study materials are available to all users, while more specialized resources and features require a premium subscription. Check out our <a href="#" onclick="showPage('services')">Services</a> page for more details on our subscription plans.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    How often are new materials added?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We regularly update our content library with new materials. Typically, we add new resources weekly, with major content updates at the beginning of each academic term.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Can I contribute my own study materials?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! We welcome contributions from educators and students. If you'd like to share your notes, practice problems, or other educational resources, please contact us through the form on this page, and our content team will get in touch with you.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    How can I report an issue with the website or materials?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    If you encounter any issues with our website or study materials, please use the contact form on this page to report the problem. Be as specific as possible about what you experienced, and our technical team will address it promptly.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- SUBJECTS PAGE -->
+        <div id="subjects-page" class="page-section">
+            <div class="container">
+                <!-- Page Header -->
+                <section class="hero-section text-center py-5 my-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 fw-bold mb-4">Study Materials</h1>
+                            <p class="lead mb-4">Browse our comprehensive collection of educational resources organized by subject.</p>
+                            
+                            <!-- Search Bar -->
+                            <div class="row justify-content-center mt-4">
+                                <div class="col-md-10">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control form-control-lg" placeholder="Search for topics, subjects, or keywords" aria-label="Search">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Categories Navigation -->
+                <section class="study-section mb-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Browse by Category</h2>
+                        <div class="btn-group" role="group" aria-label="Filter subjects">
+                            <button type="button" class="btn btn-outline-primary active">All</button>
+                            <button type="button" class="btn btn-outline-primary">Computer Science</button>
+                            <button type="button" class="btn btn-outline-primary">Business</button>
+                            <button type="button" class="btn btn-outline-primary">Mathematics</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Subject Cards -->
+                    <div class="row g-4">
+                        <!-- Computer Science Category -->
+                        <div class="col-12">
+                            <h3 class="mb-3">Computer Science</h3>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-code me-2 text-primary"></i>C++ Programming
+                                    </h5>
+                                    <p class="card-text">Learn C++ programming language fundamentals, data structures, algorithms, and advanced concepts through comprehensive notes and examples.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                        <span class="badge bg-warning">Advanced</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="https://drive.google.com/drive/folders/1BK1oqYJia9RkX3k3ZvtB1eBiJbj3cFwO" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-danger mt-3 me-3">
+                                    New
+                                </span>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-code-branch me-2 text-primary"></i>HTML & Web Development
+                                    </h5>
+                                    <p class="card-text">Learn HTML, CSS, and web design principles. Build responsive websites and understand modern web development techniques.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="https://drive.google.com/drive/folders/1BhIKdBevHCrqSRGFEXRQn41hkhT10Kls" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-database me-2 text-primary"></i>Database Management
+                                    </h5>
+                                    <p class="card-text">Study database design, SQL, normalization, transaction management, and data modeling with practical examples.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="https://drive.google.com/drive/folders/1Bt2qHixJ89KUTypGt560c6Hg62xv28a7" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Business Category -->
+                        <div class="col-12">
+                            <h3 class="mb-3">Business & Management</h3>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-business-time me-2 text-primary"></i>Basic Management
+                                    </h5>
+                                    <p class="card-text">Explore fundamental management principles, organizational behavior, leadership styles, and business ethics.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="https://basicmanagement.tiiny.site" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chart-pie me-2 text-primary"></i>Marketing Fundamentals
+                                    </h5>
+                                    <p class="card-text">Learn marketing concepts, consumer behavior, market research, digital marketing strategies, and branding techniques.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-danger mt-3 me-3">
+                                    New
+                                </span>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-calculator me-2 text-primary"></i>Financial Accounting
+                                    </h5>
+                                    <p class="card-text">Study accounting principles, financial statements, balance sheets, cash flow analysis, and taxation basics.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mathematics Category -->
+                        <div class="col-12">
+                            <h3 class="mb-3">Mathematics & Statistics</h3>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chart-line me-2 text-primary"></i>Statistics
+                                    </h5>
+                                    <p class="card-text">Explore statistical methods, probability theory, hypothesis testing, regression analysis, and data interpretation techniques.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                        <span class="badge bg-warning">Advanced</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="https://drive.google.com/drive/folders/1C_fM5j4VRIsB-7ktzpc_n4BuwVA3RMBP" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-square-root-alt me-2 text-primary"></i>Calculus
+                                    </h5>
+                                    <p class="card-text">Learn differential and integral calculus, limits, derivatives, integrals, and applications to real-world problems.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-info me-2">Beginner</span>
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                        <span class="badge bg-warning">Advanced</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="card subject-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-project-diagram me-2 text-primary"></i>Discrete Mathematics
+                                    </h5>
+                                    <p class="card-text">Study set theory, logic, combinatorics, graph theory, and other discrete structures with computer science applications.</p>
+                                    <div class="mt-3">
+                                        <span class="badge bg-secondary me-2">Intermediate</span>
+                                        <span class="badge bg-warning">Advanced</span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="#" class="btn btn-sm btn-outline-primary mt-2">Access Materials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Request Materials Section -->
+                <section class="study-section daily-notes">
+                    <h2>Can't Find What You're Looking For?</h2>
+                    <p>If you need materials for a subject or topic that isn't currently available, let us know!</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <form id="requestForm">
+                                <div class="mb-3">
+                                    <label for="requestSubject" class="form-label">Subject/Topic</label>
+                                    <input type="text" class="form-control" id="requestSubject" placeholder="e.g., Python Programming, Economics">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="requestDetails" class="form-label">Additional Details</label>
+                                    <textarea class="form-control" id="requestDetails" rows="3" placeholder="Tell us more about what you're looking for..."></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="requestEmail" class="form-label">Your Email</label>
+                                    <input type="email" class="form-control" id="requestEmail" placeholder="We'll notify you when it's available">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div>
+                                <h5><i class="fas fa-lightbulb me-2 text-warning"></i>How it works</h5>
+                                <ul>
+                                    <li>Submit your request with as much detail as possible</li>
+                                    <li>Our content team will review your request</li>
+                                    <li>We'll source high-quality materials for the requested topic</li>
+                                    <li>You'll receive an email notification when the materials are available</li>
+                                </ul>
+                                <p><i class="fas fa-info-circle me-2 text-info"></i>Turnaround time is typically 1-2 weeks depending on complexity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </main>
 
@@ -183,11 +1331,11 @@
                 <div class="col-md-4">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
-                        <li><a href="subjects.html" class="text-decoration-none">Study Materials</a></li>
-                        <li><a href="about.html" class="text-decoration-none">About</a></li>
-                        <li><a href="services.html" class="text-decoration-none">Services</a></li>
-                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                        <li><a href="#" onclick="showPage('home')" class="text-decoration-none">Home</a></li>
+                        <li><a href="#" onclick="showPage('subjects')" class="text-decoration-none">Study Materials</a></li>
+                        <li><a href="#" onclick="showPage('about')" class="text-decoration-none">About</a></li>
+                        <li><a href="#" onclick="showPage('services')" class="text-decoration-none">Services</a></li>
+                        <li><a href="#" onclick="showPage('contact')" class="text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -213,6 +1361,130 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
-    <script src="js/script.js"></script>
+    <script>
+        // Navigation between pages
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId + '-page').classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find the nav link for this page and make it active
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.textContent.toLowerCase().includes(pageId.toLowerCase())) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update browser history (optional)
+            history.pushState(null, null, '#' + pageId);
+        }
+        
+        // Handle browser navigation
+        window.addEventListener('popstate', function() {
+            const hash = window.location.hash.substring(1) || 'home';
+            showPage(hash);
+        });
+        
+        // Check for hash on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1) || 'home';
+            showPage(hash);
+            
+            // Add animation to cards on scroll
+            const animateElements = document.querySelectorAll('.card, .hero-section, .daily-notes');
+            
+            function checkScroll() {
+                animateElements.forEach(el => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        el.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Add initial visible class
+            checkScroll();
+            
+            // Check scroll on scroll event
+            window.addEventListener('scroll', checkScroll);
+            
+            // Contact form submission
+            document.getElementById('contactForm')?.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // You would typically send the form data to a server here
+                // For this example, we'll just show a success message
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value,
+                    subscribe: document.getElementById('subscribe').checked
+                };
+                
+                console.log('Form data:', formData);
+                
+                // Reset the form
+                this.reset();
+                
+                // Show success message (you could replace this with a proper UI notification)
+                alert('Thank you for your message! We will get back to you soon.');
+            });
+            
+            // Request form submission
+            document.getElementById('requestForm')?.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // You would typically send the form data to a server here
+                // For this example, we'll just show a success message
+                
+                const formData = {
+                    subject: document.getElementById('requestSubject').value,
+                    details: document.getElementById('requestDetails').value,
+                    email: document.getElementById('requestEmail').value
+                };
+                
+                console.log('Request data:', formData);
+                
+                // Reset the form
+                this.reset();
+                
+                // Show success message (you could replace this with a proper UI notification)
+                alert('Thank you for your request! We will notify you when the materials are available.');
+            });
+            
+            // Add browser detection for compatibility styling
+            // Detect browser
+            const isIE = /*@cc_on!@*/false || !!document.documentMode;
+            const isEdge = !isIE && !!window.StyleMedia;
+            const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+            const isFirefox = typeof InstallTrigger !== 'undefined';
+            const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+            
+            // Add browser classes to body
+            const body = document.body;
+            
+            if (isIE) body.classList.add('ie-browser');
+            if (isEdge) body.classList.add('edge-browser');
+            if (isChrome) body.classList.add('chrome-browser');
+            if (isFirefox) body.classList.add('firefox-browser');
+            if (isSafari) body.classList.add('safari-browser');
+        });
+    </script>
 </body>
 </html>
